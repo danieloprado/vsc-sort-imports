@@ -25,6 +25,10 @@ export function getOnSaveSetting() {
   return workspace.getConfiguration("sortImports").get("onSave");
 }
 
+export function getLanguagesSetting(): string[] {
+  return workspace.getConfiguration("sortImports").get<string[]>("languages");
+}
+
 export function updateSaveRegistration() {
     if (getOnSaveSetting()) {
         registerWillSaveTextDocument();
