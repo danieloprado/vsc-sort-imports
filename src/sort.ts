@@ -11,6 +11,7 @@ import {
 } from 'vscode';
 import { dirname, extname } from 'path';
 import {
+    getLanguagesSetting,
     getOnSaveSetting,
     registerWillSaveTextDocument,
     unregisterWillSaveTextDocument,
@@ -20,8 +21,7 @@ import { getConfig } from 'import-sort-config';
 import importSort from 'import-sort';
 
 function sort(document: TextDocument): string {
-    const languageRegex = /^(java|type)script(react)*$/;
-    if (!document.languageId.match(languageRegex)) {
+    if (!getLanguagesSetting().some(l => document.languageId.includes(l)) ) {
         return;
     }
 
